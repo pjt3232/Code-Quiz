@@ -1,0 +1,58 @@
+.quiz-page {
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#question {
+    font-size: 20px;
+    margin-bottom: 15px;
+    display: block;
+
+}
+
+#timer {
+    float:right;
+    font-size: 18px;
+    margin: 10px;
+}
+
+#feedback {
+    margin: 10px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    background-color: red;
+}
+
+button:hover {
+    background-color: green;
+}
+
+#save-score {
+    font-size: 16px;
+}
+
+form {
+    margin: 10px;
+    padding: 5px;
+    font-size: 18px;
+}

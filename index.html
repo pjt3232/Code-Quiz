@@ -5,81 +5,29 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width", initial-scale=1 />"
         <title>Code Quiz</title>
+        <link rel="stylesheet" href="./assets/style.css">
     </head>
     <body>
-        <header>
-            <h1>Code Quiz</h1>
-        </header>
-
         <main>
-            <section id="start-screen">
-                <h2>Welcome to the Code Quiz!</h2>
+            <section class="quiz-page" id="start-screen">
+                <h1>Welcome to the Code Quiz!</h1>
                 <button id="start-game">Start Quiz</button>
             </section>
 
-            <section id="question-screen" style="display: none;">
-                <div class="question" id="question1">
-                    <h2>Question 1</h2>
-                    <p>Which of the following CSS properties is used to control the space between the content and the border of an element?</p>
-                    <ul>
-                        <li><button>border-spacing</button></li>
-                        <li><button>padding</button></li>
-                        <li><button>margin</button></li>
-                        <li><button>content</button></li>
-                    </ul>
-                </div>
-
-                <div class="question" id="question2">
-                    <h2>Question 2</h2>
-                    <p>Which of the following HTML tags is used to define a list inside an unordered list?</p>
-                    <ul>
-                        <li><button>ul</button></li>
-                        <li><button>ol</button></li>
-                        <li><button>li</button></li>
-                        <li><button>dl</button></li>
-                    </ul>
-                </div>
-
-                <div class="question" id="question3">
-                    <h2>Question 3</h2>
-                    <p>Which of the following JavaScript functions is used to add an element to the beginning of an array?</p>
-                    <ul>
-                        <li><button>unshift()</button></li>
-                        <li><button>push()</button></li>
-                        <li><button>shift()</button></li>
-                        <li><button>pop()</button></li>
-                    </ul>
-                </div>
-
-                <div class="question" id="question4">
-                    <h2>Question 4</h2>
-                    <p>Which method is used to add an element to the end of an array in JavaScript?</p>
-                    <ul>
-                        <li><button>add()</button></li>
-                        <li><button>append()</button></li>
-                        <li><button>push()</button></li>
-                        <li><button>insert()</button></li>
-                    </ul>
-                </div>
-
-                <div class="question" id="question5">
-                    <h2>Question 5</h2>
-                    <p>What is the correct HTML tag for creating a hyperlink?</p>
-                    <ul>
-                        <li><button>link</button></li>
-                        <li><button>a</button></li>
-                        <li><button>href</button></li>
-                        <li><button>img</button></li>
-                    </ul>
-                </div>
+            <section class="quiz-page hide" id="question-screen">
+                <div id="question"></div>
+                <div id="feedback"></div>
+                <div id="timer">Time Left: <span id="time-left"></span></div>
             </section>
 
-            <section id="end-screen" style="display: none;">
+            <section class="hide" id="end-screen">
                 <h2>Game Over!</h2>
                 <p>Your final score is <span id="final-score"></span>.</p>
-                <label for="intials">Enter your intials:</label>
-                <input type="text" id="intials">
-                <button id="save-score">Save Score</button>
+                <form>
+                    <label for="intials">Enter your intials:</label>
+                    <input type="text" id="intials" name="intials" maxLength="3" required>
+                    <button id="save-score">Save Score</button>
+                </form>
             </section>
         </main>
         <script src=./assets/script.js></script>
