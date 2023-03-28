@@ -15,19 +15,32 @@
             </section>
 
             <section class="quiz-page hide" id="question-screen">
-                <div id="question"></div>
-                <div id="feedback"></div>
+                <div>
+                    <h2 id="question-text">Which of the following CSS properties is used to control the space between the content and the border of an element?</h2>
+                    <ul id="choices-list">
+                        <li><button>border-spacing</button></li>
+                        <li><button>padding</button></li>
+                        <li><button>margin</button></li>
+                        <li><button>content</button></li>
+                    </ul>
+                </div>
                 <div id="timer">Time Left: <span id="time-left"></span></div>
             </section>
 
             <section class="hide" id="end-screen">
                 <h2>Game Over!</h2>
-                <p>Your final score is <span id="final-score"></span>.</p>
                 <form>
                     <label for="intials">Enter your intials:</label>
-                    <input type="text" id="intials" name="intials" maxLength="3" required>
-                    <button id="save-score">Save Score</button>
+                    <input type="text" id="initials-input" name="intials" maxLength="3" required>
+                    <button id="submit-button">Save Score</button>
                 </form>
+            </section>
+
+            <section id="high-scores-screen" class="hide">
+                <h2>High Scores</h2>
+                <ol id="high-scores-list">
+                </ol>
+
             </section>
         </main>
         <script src=./assets/script.js></script>

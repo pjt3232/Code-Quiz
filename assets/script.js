@@ -1,54 +1,136 @@
-<div class="question" id="question1">
-                    <h3>Question 1</h3>
-                    <p>Which of the following CSS properties is used to control the space between the content and the border of an element?</p>
-                    <ul>
-                        <li><button>border-spacing</button></li>
-                        <li><button>padding</button></li>
-                        <li><button>margin</button></li>
-                        <li><button>content</button></li>
-                    </ul>
-                </div>
+var startButton = document.getElementById("start-game");
+var startScreen = document.getElementById("start-screen");
+var questionContainer = document.getElementById("question-screen");
+var questionText = document.getElementById("question-text");
+var choicesList = document.getElementById("choices-list");
+var timerDisplay = document.getElementById("time-left");
+var submitButton = document.getElementById("submit-button");
+var initialsInput = document.getElementById("initials-input");
+var highScoresScreen = document.getElementById("high-scores-screen");
+var highScoresList = document.getElementById("high-scores-list");
+var endScreen = document.getElementById("end-screen");
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-                <div class="question" id="question2">
-                    <h3>Question 2</h3>
-                    <p>Which of the following HTML tags is used to define a list inside an unordered list?</p>
-                    <ul>
-                        <li><button>ul</button></li>
-                        <li><button>ol</button></li>
-                        <li><button>li</button></li>
-                        <li><button>dl</button></li>
-                    </ul>
-                </div>
+var currentQuestionIndex = 0;
+var timeLeft = 60;
+var score = 0;
+var timerId;
 
-                <div class="question" id="question3">
-                    <h3>Question 3</h3>
-                    <p>Which of the following JavaScript functions is used to add an element to the beginning of an array?</p>
-                    <ul>
-                        <li><button>unshift()</button></li>
-                        <li><button>push()</button></li>
-                        <li><button>shift()</button></li>
-                        <li><button>pop()</button></li>
-                    </ul>
-                </div>
+var quizQuestions = [
+    {
+        question: "Which of the following CSS properties is used to control the space between the content and the border of an element?",
+        choices: ["border-spacing", "padding", "margin", "content"],
+        answer: "padding"
+    },
+    {
+        question: "Which of the following HTML tags is used to define a list inside an unordered list?",
+        choices: ["ul", "ol", "li", "dl"],
+        answer: "li"
+    },
+    {
+        question: "Which of the following JavaScript functions is used to add an element to the beginning of an array?",
+        choices: ["unshift", "push", "shift", "pop"],
+        answer: "unshift"
+    },
+    {
+        question: "Which method is used to add an element to the end of an array in JavaScript?",
+        choices: ["add", "append", "push", "insert"],
+        answer: "push"
+    },
+    {
+        question: "What is the correct HTML tag for creating a hyperlink?",
+        choices: ["link", "a", "href", "img"],
+        answer: "a"
+    }
+];
 
-                <div class="question" id="question4">
-                    <h3>Question 4</h3>
-                    <p>Which method is used to add an element to the end of an array in JavaScript?</p>
-                    <ul>
-                        <li><button>add()</button></li>
-                        <li><button>append()</button></li>
-                        <li><button>push()</button></li>
-                        <li><button>insert()</button></li>
-                    </ul>
-                </div>
+startButton.addEventListener("click", startQuiz);
 
-                <div class="question" id="question5">
-                    <h3>Question 5</h3>
-                    <p>What is the correct HTML tag for creating a hyperlink?</p>
-                    <ul>
-                        <li><button>link</button></li>
-                        <li><button>a</button></li>
-                        <li><button>href</button></li>
-                        <li><button>img</button></li>
-                    </ul>
-                </div>
+function startQuiz() {
+    startScreen.classList.add("hide");
+    questionContainer.classList.remove("hide");
+    showQuestion();
+    startTimer();
+}
+
+function showQuestion() {
+    questionText.textContent = quizQuestions[currentQuestionIndex].question;
+    choicesList.innerHTML = ""
+    
+    for(var i = 0;i <quizQuestions[currentQuestionIndex].choices.length; i++) {
+        choice = document.createElement("li");
+        choice.textContent = quizQuestions[currentQuestionIndex].choices[i];
+        choice.addEventListener("click", checkAnswer);
+        choicesList.appendChild(choice);
+    }
+}
+
+function checkAnswer(event) {
+    var selectedChoice = event.target.textContent;
+    var correctChoice = quizQuestions[currentQuestionIndex].answer;
+
+    if(selectedChoice === correctChoice) {
+        score += 10;
+    } else {
+        timeLeft -= 10;
+        if(timeLeft < 0) {
+            timeLeft = 0;
+        }
+        timerDisplay.textContent = timeLeft;
+    }
+    currentQuestionIndex++;
+    if(currentQuestionIndex < quizQuestions.length){
+        showQuestion();
+    } else {
+        endQuiz();
+    }
+}
+
+function startTimer() {
+    timerId = setInterval(function() {
+        timeLeft--;
+        if(timeLeft < 0) {
+            timeLeft = 0;
+            endQuiz();
+        }
+        timerDisplay.textContent = timeLeft;
+    }, 1000);
+}
+
+function endQuiz() {
+    clearInterval(timerId);
+    questionContainer.classList.add("hide");
+    endScreen.classList.remove("hide");
+}
+
+function saveHighScore(event) {
+    event.preventDefault();
+    endScreen.classList.add("hide");
+    highScoresScreen.classList.remove("hide");
+    initials = initialsInput.value;
+
+    var newHighScore = {
+        initials: initials,
+        score: score,
+    };
+    highScores.push(newHighScore);
+    highScores.sort(function(x,y) {
+        return y.score - x.score;
+    });
+    highScores.splice(5);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    showHighScores();
+}
+
+function showHighScores() {
+    highScoresList.innerHTML = "";
+    for(var i = 0;i < highScores.length; i++) {
+        var highScore = document.createElement("li");
+        highScore.textContent = highScores[i].initials + " : " + highScores[i].score;
+        highScoresList.appendChild(highScore);
+    }
+}
+
+submitButton.addEventListener("click", saveHighScore);
+
+
