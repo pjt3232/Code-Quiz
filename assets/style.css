@@ -1,3 +1,4 @@
+/*This class is for the separate sections of the entire application*/
 .quiz-page {
     width: 80%;
     max-width: 800px;
@@ -5,16 +6,19 @@
     text-align: center;
 }
 
+/*This class is used with JavaScript to hide screens until they are needed or not needed*/
 .hide {
     display: none;
 }
 
+/*styles the main heading*/
 h1 {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
+/*id styling for all of the questions on the page*/
 #question {
     font-size: 20px;
     margin-bottom: 15px;
@@ -22,16 +26,14 @@ h1 {
 
 }
 
+/*styles the timer element on the screen*/
 #timer {
     float:right;
     font-size: 18px;
     margin: 10px;
 }
 
-#feedback {
-    margin: 10px;
-}
-
+/*styles all of the buttons found on the page*/
 button {
     margin: 10px;
     padding: 10px;
@@ -43,6 +45,7 @@ button {
     background-color: red;
 }
 
+/*psuedo-class for starting button and submit button*/
 button:hover {
     background-color: green;
 }
@@ -51,6 +54,7 @@ button:hover {
     font-size: 16px;
 }
 
+/*styling for the initials input form element on the game over screen*/
 form {
     margin: 10px;
     padding: 5px;
